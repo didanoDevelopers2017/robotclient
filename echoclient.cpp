@@ -70,10 +70,10 @@ void EchoClient::onConnected()
         qDebug() << "WebSocket connected";
     connect(&m_webSocket, &QWebSocket::textMessageReceived,
             this, &EchoClient::onTextMessageReceived);
-    //m_webSocket.sendTextMessage(QStringLiteral("Hello, world!"));
-    //m_webSocket.sendTextMessage(QStringLiteral("{\"methodName\":\"connect\",\"info\":\"建立连接\"}"));
-    //{"methodName":"reportVersion","info":{"deviceNo":"2sf21","emotionZipVersion":"1.23.2","voiceZipVersion":"3.2"}}
-    m_webSocket.sendTextMessage(QStringLiteral("{\"methodName\":\"reportVersion\",\"info\":{\"deviceNo\":\"2sf21\",\"emotionZipVersion\":\"1.23.2\",\"voiceZipVersion\":\"3.2\"}}"));
+    //1.0--->初次连接
+    m_webSocket.sendTextMessage(QStringLiteral("{\"methodName\":\"connect\",{\"deviceNo\":\"2sf21\"}}"));
+    //2.0--->上报版本信息
+    //m_webSocket.sendTextMessage(QStringLiteral("{\"methodName\":\"reportVersion\",\"info\":{\"deviceNo\":\"2sf21\",\"emotionZipVersion\":\"1.23.2\",\"voiceZipVersion\":\"3.2\"}}"));
 }
 
 void EchoClient::onTextMessageReceived(QString message)
